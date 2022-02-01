@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Form from '../common/Form/Form';
 import Header from '../common/Header/Header';
+import { StyledSignIn } from './styled';
+import { StyledParagraphSignOut } from '../common/Paragraph/styled';
 
 const loginInputs = [
     {
@@ -19,29 +21,26 @@ const loginInputs = [
     }
 ];
 
-const SignIn = () => {
-
-    return (
-        <>
-            <Header text='Sign Up Here' link='/signUp' className='header-title'/>
-            <div className="login">
-                <h1>Log In</h1>
-                <hr/>
-                <Form
-                    inputs={loginInputs}
-                    submitForm={()=>{}}
-                    validateField={()=>{}}/>
-                <div className='signup-link'>
-                    <p className='in-out'>
-                        Forgot password?
-                        <Link to="/forgotPassword">
-                            Restore a password
-                        </Link>
-                    </p>
-                </div>
-            </div>
-        </>
-    );
-};
+const SignIn = () => (
+    <>
+        <Header text='Sign Up Here' link='/signUp'/>
+        <StyledSignIn>
+            <h1>Log In</h1>
+            <hr/>
+            <Form
+                inputs={loginInputs}
+                submitForm={() => {
+                }}
+                validateField={() => {
+                }}/>
+            <StyledParagraphSignOut>
+                Forgot password?
+                <Link to="/forgotPassword">
+                    Restore a password
+                </Link>
+            </StyledParagraphSignOut>
+        </StyledSignIn>
+    </>
+);
 
 export default SignIn;

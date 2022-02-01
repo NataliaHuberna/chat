@@ -1,16 +1,14 @@
 import React from 'react';
+import { StyledButton } from './styled';
 
 interface IButton {
     text: string,
-    className: string,
     type: 'submit' | 'button',
     actionToDo: any,
 }
 
-const Button = ({text, className, type, actionToDo}: IButton) => {
-    return (
-        <button type={type} className={className} onClick={actionToDo}>{text}</button>
-    );
-};
+const Button = ({text, type, actionToDo}: IButton) => (
+    <StyledButton type={type} onClick={actionToDo}>{text}</StyledButton>
+);
 
 export default Button;
