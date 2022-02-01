@@ -1,11 +1,11 @@
 import React from 'react';
-import './MainLayout.css';
 
-const MainLayout = () => {
+const ForgotPassword = () => {
     return (
         <div>
+            
         </div>
     );
 };
 
-export default MainLayout;
+export default ForgotPassword;

@@ -3,18 +3,31 @@ import Input from '../Input/Input';
 import Button from '../Button/Button';
 
 interface IForm {
-    someAction: any,
+    inputs: Array<any>,
+    submitForm: any,
+    validateField:any,
+
 }
 
-const Form = ({someAction}:IForm) => {
+const Form = ({inputs,submitForm,validateField}:IForm) => {
+    const inputsMapped = inputs.map((i) => (
+        <Input
+            label={i.label}
+            type={i.type}
+            validated={i.validated}
+            validateField={validateField}
+            className="field field-in"
+            key={i.id}
+        />
+    ));
+
     return (
         <div>
-            <form>
-                <Input label="Email" type="text" className="field field-in" validated=""/>
-                <Input label="Password" type="password" className="field field-in" validated=""/>
+            <form onSubmit={submitForm}>
+                {inputsMapped}
                 <div>
                     <hr/>
-                    <Button text="Submit" type="submit" className="submit-button" actionToDo={someAction}/>
+                    <Button text="Submit" type="submit" className="submit-button" actionToDo={validateField}/>
                 </div>
             </form>
         </div>

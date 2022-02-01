@@ -1,25 +1,46 @@
-import React, { useState } from 'react';
-import Form from '../common/Form/Form';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Form from '../common/Form/Form';
+import Header from '../common/Header/Header';
+
+const loginInputs = [
+    {
+        label: "Email",
+        type: "text",
+        show: true,
+        validated: "",
+        id: "a"
+    }, {
+        label: "Password",
+        type: "password",
+        show: true,
+        validated: "",
+        id: "b"
+    }
+];
 
 const SignIn = () => {
 
-    const [user, setUser] = useState({ email: '', password: '' });
-
     return (
-        <div className="login">
-            <h1>Log In</h1>
-            <hr/>
-            <Form someAction={setUser}/>
-            <div>
-                <p>
-                    Don`t have an account?
-                    <Link to="/signUp">
-                        <a href='#'>Sign Up Here </a>
-                    </Link>
-                </p>
+        <>
+            <Header text='Sign Up Here' link='/signUp' className='header-title'/>
+            <div className="login">
+                <h1>Log In</h1>
+                <hr/>
+                <Form
+                    inputs={loginInputs}
+                    submitForm={()=>{}}
+                    validateField={()=>{}}/>
+                <div className='signup-link'>
+                    <p className='in-out'>
+                        Forgot password?
+                        <Link to="/forgotPassword">
+                            Restore a password
+                        </Link>
+                    </p>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

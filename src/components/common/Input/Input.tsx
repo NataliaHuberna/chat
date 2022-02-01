@@ -5,9 +5,10 @@ interface Label{
     type: string,
     className: string,
     validated: string,
+    validateField: any,
 }
 
-const Input = ({label, type, className, validated}: Label) => {
+const Input = ({label,type, validated,validateField,className}: Label) => {
     return (
         <div className={className}>
             <label className="label">{label}
@@ -18,7 +19,7 @@ const Input = ({label, type, className, validated}: Label) => {
                     aria-hidden="true"
                 />
             </label>
-            <input type={type} className="input"/>
+            <input type={type} className="input" onBlur={validateField}/>
         </div>
     );
 };
