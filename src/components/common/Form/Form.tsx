@@ -22,8 +22,7 @@ const Form = ({inputs, submitForm, validateField}: IForm) => {
 
     return (
         <form onSubmit={submitForm}>
-            {inputsMapped}
-            <hr/>
+            {children}
             <Button text="Submit" type="submit" actionToDo={validateField}/>
         </form>
     );

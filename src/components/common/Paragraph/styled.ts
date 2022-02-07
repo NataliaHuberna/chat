@@ -11,7 +11,7 @@ export const StyledParagraph = styled.p`
     margin-left: 17px;
     border: 1px solid rgba(255, 255, 255, 0.7);
     border-radius: 2px;
-    padding: 2px;
+    padding: 4px 10px;
     transition: all .4s ease-out;
   }
   & a:hover{
