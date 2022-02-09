@@ -1,54 +1,44 @@
 import React, { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
-import '../SignIn/slyles.css';
-import { Navigate } from "react-router-dom";
-// import axios from 'axios';
+import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
-const SignUp = () => {
+const NewPassword = () => {
     const {
         handleSubmit,
-        formState: {errors, isDirty},
+        formState: {errors},
         control
     } = useForm({
         mode: 'onChange',
     });
     const [redirect, setRedirect] = useState(false);
-    // const registateUser = async(body: any) => {
-    //     try {
-    //         await axios.post('http://sluipgenius.pp.ua/api/sign-up', body);
-    //     } catch (error) {
-    // alert('Some problems with server');
-    //         return false;
-    //     } finally {
-    //
-    //     }
-    // };
+    const registateUser = async(body: any) => {
+        try {
+            await axios.post('http://sluipgenius.pp.ua/api/new-password', body);
+            // (Number(status) === 200 ? setRedirect(true) : alert('Your password is not same'));
+            setRedirect(true);
+        } catch (error) {
+            alert('Your login or password not valid');
+            return false;
+        }
+        // finally {
+        //
+        // }
+    };
     if (redirect) {
         return <Navigate to={'/'}/>;
     }
     return (
         <form
             onSubmit={handleSubmit((values) => {
-                if (values.password === values.RePassword) {
-                    alert(JSON.stringify(values));
-                    setRedirect(true);
-                } else {
-                    alert('Your password is not same');
-                }
-                // registateUser(values);
+                values.password === values.RePassword
+                    ? registateUser(values)
+                    : alert('Your password is not same');
             })}>
-            <h1>Sign Up</h1>
+            <h1>New Password</h1>
             <hr/>
-            <Controller
-                name="email"
-                control={control}
-                rules={{required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g}}
-                render={({field: {onChange}}) => {
-                    return <Input hintText="Standard email settings" text="Email"
-                        onChange={onChange} error={getError(errors.email?.type, "email")}/>;
-                }}/>
             <Controller
                 name="password"
                 control={control}
@@ -73,10 +63,9 @@ const SignUp = () => {
                         onChange={onChange} error={getError(errors.password?.type, "RePassword")}/>;
                 }}/>
             <hr/>
-            <input className='submit' type="submit" value="Submit"
-                disabled={!isDirty}/>
+            <input className='submit' type="submit" value="Submit"/>
         </form>
     );
 };
 
-export default SignUp;
+export default NewPassword;

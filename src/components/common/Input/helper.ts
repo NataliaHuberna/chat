@@ -13,9 +13,3 @@ export const getError = ( type, fieldName ) => {
             return null;
     }
 };
-//     if (type ==="minLength") return `Your ${fieldName} is not correct`
-// }
-//     {errors?.password?.type === "minLength" && (<p>Your password is not correct</p>)}
-//         {errors?.password?.type === "maxLength" && (<p>Password cannot exceed 20 characters</p>)}
-//             {errors?.password?.type === "pattern" && (<p>Your password is unvalid</p>)}
-// }

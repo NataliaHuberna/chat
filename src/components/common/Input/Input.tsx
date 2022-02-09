@@ -11,25 +11,22 @@
 // };
 // export default Input;
 import React from 'react';
-import {ReactComponent as HelpIcon} from "../../../icons/help.svg";
-// import {ReactComponent as Help2 }from "../../../icons/216643_help_icon.svg";
+import { ReactComponent as HelpIcon } from "../../../icons/help.svg";
 
 // @ts-ignore
-const Input = ({value, onChange, error }:any)  => {
-    const handleChange = (e: { target: { value: any; }; }) => onChange(e.target.value);
-    console.log(value);
+const Input = ({onChange, error, hintText, text, name}: any) => {
+    const handleChange = (e: {target: {value: any;};}) => onChange(e.target.value);
     return (
-        <>
-            <input onChange={handleChange}/>
-            <div style={{"width":"50px", "color": "lightgreen"}}>
-                <HelpIcon/>
+        <div className='field'>
+            <label>{text}</label>
+            <div className='wrapperInput'>
+                <input type={name} className='input' onChange={handleChange}/>
+                <div style={{"width": "50px", "color": "lightgreen"}}>
+                    <HelpIcon title={hintText || null}/>
+                </div>
             </div>
-            {/*<div style={{"width":"50px"}}>*/}
-            {/*    <Help2/>*/}
-            {/*</div>*/}
-            {/*<i title={hintText || null}>!!!</i>*/}
             {error && <p>{error}</p>}
-        </>
+        </div>
     );
 };
 
