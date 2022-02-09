@@ -85,7 +85,7 @@ const SignIn = () => {
                 control={control}
                 rules={{ required: true }}
                 render={({ field: {onChange, value} }) => {
-                    return <Input
+                    return <Input hintText="email with dog"
                         onChange={onChange} value={value} error={getError(errors.email?.type, "email")}/>;
                 }} />
             {/*<FontAwesomeIcon icon="fa-solid fa-circle-info" />*/}
