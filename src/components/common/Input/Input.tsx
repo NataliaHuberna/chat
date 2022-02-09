@@ -1,25 +1,27 @@
+// import React from 'react';
+//
+// // @ts-ignore
+// const Input = ({ type, register, options }) => {
+//     return (
+//         <input
+//             type={type}
+//             {...register(type, options)}
+//         />
+//     );
+// };
+// export default Input;
 import React from 'react';
-import { StyledDivInput, StyledInput, StyledLabel } from './styled';
 
-interface Label {
-    label: string,
-    type: string,
-    validated: string,
-    validateField: any,
-}
-
-const Input = ({label, type, validated, validateField}: Label) => (
-    <StyledDivInput>
-        <StyledLabel>{label}
-            <i
-                className={validated
-                    ? "fa fa-check animate-check"
-                    : ""}
-                aria-hidden="true"
-            />
-        </StyledLabel>
-        <StyledInput type={type} onBlur={validateField}/>
-    </StyledDivInput>
-);
+// @ts-ignore
+const Input = ({value, onChange, error}:any)  => {
+    const handleChange = (e: { target: { value: any; }; }) => onChange(e.target.value);
+    console.log(value);
+    return (
+        <>
+            <input onChange={handleChange}/>
+            {error && <p>{error}</p>}
+        </>
+    );
+};
 
 export default Input;
