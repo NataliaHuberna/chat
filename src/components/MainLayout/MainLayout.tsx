@@ -1,15 +1,17 @@
 import React from 'react';
-// import './MainLayout.css';
+import { useLocation, Outlet } from 'react-router-dom';
 import Header from '../common/Header/Header';
 import { getNextRoute } from '../../helpers/routes';
-import { useLocation,Outlet } from 'react-router-dom';
+import { StMain } from './styled';
 
 const MainLayout = () => {
     const { link, content } = getNextRoute(useLocation().pathname);
     return (
         <>
             <Header text={content} link={link}/>
-            <Outlet/>
+            <StMain>
+                <Outlet/>
+            </StMain>
         </>
     );
 };

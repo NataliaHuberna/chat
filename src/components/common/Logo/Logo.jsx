@@ -1,10 +1,14 @@
 import React from 'react';
-import {LogoImg} from './styled';
-import logo from '../../../images/Logo.png';
+import { Link } from 'react-router-dom';
+import { LogoImg } from './styled';
+import logo from '../../../icons/logo.svg';
+
 
 const Logo = () => {
     return (
-        <LogoImg src={logo} alt="logo"/>
+        <Link to="/">
+            <LogoImg src={logo} alt="logo"/>
+        </Link>
     );
 };
 

@@ -1,35 +1,21 @@
-// import React from 'react';
-//
-// // @ts-ignore
-// const Input = ({ type, register, options }) => {
-//     return (
-//         <input
-//             type={type}
-//             {...register(type, options)}
-//         />
-//     );
-// };
-// export default Input;
 import React from 'react';
-import {ReactComponent as HelpIcon} from "../../../icons/help.svg";
-// import {ReactComponent as Help2 }from "../../../icons/216643_help_icon.svg";
+import { ReactComponent as HelpIcon } from "../../../icons/help.svg";
+import { StError, StIcon, StInputContainer, StInputItem, StyledInput, StyledLabel } from './styled';
 
 // @ts-ignore
-const Input = ({value, onChange, error }:any)  => {
-    const handleChange = (e: { target: { value: any; }; }) => onChange(e.target.value);
-    console.log(value);
+const Input = ({onChange,error, hintText, text, name}: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value);
     return (
-        <>
-            <input onChange={handleChange}/>
-            <div style={{"width":"50px", "color": "lightgreen"}}>
-                <HelpIcon/>
-            </div>
-            {/*<div style={{"width":"50px"}}>*/}
-            {/*    <Help2/>*/}
-            {/*</div>*/}
-            {/*<i title={hintText || null}>!!!</i>*/}
-            {error && <p>{error}</p>}
-        </>
+        <StInputContainer>
+            <StyledLabel>{text}</StyledLabel>
+            <StInputItem>
+                <StyledInput type={name} onChange={handleChange} error={error}/>
+                <StIcon>
+                    <HelpIcon title={hintText || null}/>
+                </StIcon>
+            </StInputItem>
+            {error && <StError>{error}</StError>}
+        </StInputContainer>
     );
 };
 

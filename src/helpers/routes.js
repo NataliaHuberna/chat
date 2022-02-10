@@ -1,10 +1,11 @@
+import {URL} from '../constants/url';
+import {TEXT_VALUES} from '../constants/textValues';
+
 export const getNextRoute = (currentLink) => {
     switch (currentLink){
-        case '/':
-            return {link:'/signUp', content: 'Sing Up'};
-        case '/forgotPassword':
-            return {link:'/signUp', content: 'Sing Up'};
+        case URL.DEFAULT_PAGE:
+            return {link:URL.SIGN_UP, content: TEXT_VALUES.SIGN_UP};
         default:
-            return {link:'/', content: 'Sing In'};
+            return {link:URL.DEFAULT_PAGE, content: TEXT_VALUES.LOG_IN};
     }
 };
