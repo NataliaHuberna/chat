@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {COLORS} from "../../../constants/colors";
 
 export const StHeadLiner = styled.hr`
   border: 0;
@@ -7,16 +8,16 @@ export const StHeadLiner = styled.hr`
   margin-top: 35px;
   background-image: linear-gradient(
           to right,
-          rgba(255,255,255,.2),
-          rgba(255,255,255,1),
-          rgba(255,255,255,.2));
+          ${COLORS.HR_LIGHT},
+          ${COLORS.HR_DARK},
+          ${COLORS.HR_LIGHT});
 `;
 export const StForm = styled.form`
   display: block;
   padding: 45px;
-  background-color: rgba(255, 255, 255, .3);
+  background-color: ${COLORS.PRIMARY_COLOR_LIGHT};
   text-align: center;
   width: 450px;
   margin: 0 auto;
-  color: white;
+  color: ${COLORS.WHITE};
 `;

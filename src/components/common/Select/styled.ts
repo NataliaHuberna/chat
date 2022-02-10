@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {COLORS} from "../../../constants/colors";
 
 // eslint-disable-next-line no-undef
 export const StyledSelectWrapper = styled.div<any>`
@@ -11,8 +12,8 @@ export const StyledSelectWrapper = styled.div<any>`
     border: none;
     font-size: 18px;
     padding: 10px;
-    color: #25291b;
-    background-color: rgba(255, 255, 255, .5);
-    box-shadow: 10px 10px 10px -10px rgba(0, 0, 0, 0.3);
+    color: ${COLORS.PRIMARY_SELECT_COLOR};
+    background-color: ${COLORS.PRIMARY_INPUT_COLOR};
+    box-shadow: 10px 10px 10px -10px ${COLORS.SHADOW};
   }
 `;

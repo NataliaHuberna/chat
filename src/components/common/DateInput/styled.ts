@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {COLORS} from "../../../constants/colors";
 
 // eslint-disable-next-line no-undef
 export const StDatepickerWrapper = styled.div<any>`
@@ -9,11 +10,11 @@ export const StDatepickerWrapper = styled.div<any>`
       height: 40px;
       border-radius: 2px;
       text-align: center;
-      border: ${({error}) => error ? '2px solid #dc1414' : 'none'};
+      border: ${({error}) => error ? `2px solid ${COLORS.ERROR_COLOR}` : 'none'};
       font-size: 18px;
       padding: 10px;
-      color: #25291b;
-      background-color: rgba(255, 255, 255, .5);
-      box-shadow: 10px 10px 10px -10px rgba(0, 0, 0, 0.3);
+      color: ${COLORS.PRIMARY_SELECT_COLOR};
+      background-color: ${COLORS.PRIMARY_INPUT_COLOR};
+      box-shadow: 10px 10px 10px -10px ${COLORS.SHADOW};
     }
 `;

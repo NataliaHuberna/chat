@@ -18,5 +18,6 @@ export const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    font-family: "Raleway", sans-serif;    
   }
 `;
