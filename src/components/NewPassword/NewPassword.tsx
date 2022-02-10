@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import Input from '../common/Input/Input';
-import { getError } from '../common/Input/helper';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import Input from '../common/Input/Input';
+import { getError } from '../common/Input/helper';
+import { StForm, StHeadLiner } from '../common/Form/styled';
+import { StSubmitInput } from '../common/Input/styled';
+import {BACKEND_URL} from '../../constants/url';
+import {REG_EXP} from '../../constants/regExp';
+import { HINTS, TEXT_VALUES } from '../../constants/textValues';
 
 const NewPassword = () => {
     const {
@@ -16,55 +21,56 @@ const NewPassword = () => {
     const [redirect, setRedirect] = useState(false);
     const registateUser = async(body: any) => {
         try {
-            await axios.post('http://sluipgenius.pp.ua/api/new-password', body);
+            await axios.post(BACKEND_URL.NEW_PASSWORD, body);
             // (Number(status) === 200 ? setRedirect(true) : alert('Your password is not same'));
             setRedirect(true);
         } catch (error) {
-            alert('Your login or password not valid');
+            alert(`${error}`);
             return false;
         }
-        // finally {
-        //
-        // }
     };
     if (redirect) {
         return <Navigate to={'/'}/>;
     }
     return (
-        <form
+        <StForm
             onSubmit={handleSubmit((values) => {
                 values.password === values.RePassword
                     ? registateUser(values)
                     : alert('Your password is not same');
+                alert('worked');
             })}>
             <h1>New Password</h1>
-            <hr/>
+            <StHeadLiner/>
             <Controller
                 name="password"
                 control={control}
                 rules={{
-                    required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/s,
+                    required: true, pattern: REG_EXP.PASSWORD_REG_EXP,
                     minLength: 8, maxLength: 20
                 }}
                 render={({field: {onChange}}) => {
-                    return <Input hintText="8-20 symbols, 1 upper letter, 1 number" text="Password" name="password"
-                        onChange={onChange} error={getError(errors.password?.type, "password")}/>;
+                    return <Input hintText={HINTS.PASSWORD_HINT}
+                        text={TEXT_VALUES.PASSWORD[0].toUpperCase()+TEXT_VALUES.PASSWORD.slice(1)}
+                        name={TEXT_VALUES.PASSWORD}
+                        onChange={onChange} error={getError(errors.password?.type, TEXT_VALUES.PASSWORD)}/>;
                 }}/>
             <Controller
                 name="RePassword"
                 control={control}
                 rules={{
-                    required: true, pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/s,
+                    required: true, pattern: REG_EXP.PASSWORD_REG_EXP,
                     minLength: 8, maxLength: 20
                 }}
                 render={({field: {onChange}}) => {
-                    return <Input hintText="8-20 symbols, 1 upper letter, 1 number"
-                        text="Re-Password" name="password"
-                        onChange={onChange} error={getError(errors.password?.type, "RePassword")}/>;
+                    return <Input hintText={HINTS.PASSWORD_HINT}
+                        text={TEXT_VALUES.RE_PASSWORD}
+                        name={TEXT_VALUES.PASSWORD}
+                        onChange={onChange} error={getError(errors.RePassword?.type, TEXT_VALUES.RE_PASSWORD)}/>;
                 }}/>
-            <hr/>
-            <input className='submit' type="submit" value="Submit"/>
-        </form>
+            <StHeadLiner/>
+            <StSubmitInput type="submit" value={TEXT_VALUES.SUBMIT_VALUE}/>
+        </StForm>
     );
 };
 

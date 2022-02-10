@@ -20,10 +20,7 @@ export const StyledParagraph = styled.p`
   }
 `;
 export const StyledParagraphSignOut = styled.p`
-  font-size: 12px;
   margin-top: 30px;
-  padding-right: 5px;
-  padding-left: 5px;
   & a{
     color: lightgreen;
     text-decoration: none;

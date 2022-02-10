@@ -1,10 +1,14 @@
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import { StyledParagraphSignOut } from '../common/Paragraph/styled';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { StForm, StHeadLiner } from '../common/Form/styled';
+import { StSubmitInput } from '../common/Input/styled';
+import { BACKEND_URL, URL } from '../../constants/url';
+import { HINTS, TEXT_VALUES } from '../../constants/textValues';
 
 const ForgotPassword = () => {
     const {
@@ -16,7 +20,7 @@ const ForgotPassword = () => {
     });
     const registateUser = async(body: any) => {
         try {
-            await axios.post('http://sluipgenius.pp.ua/api/forgot-password', body);
+            await axios.post(BACKEND_URL.FORGOT_PASSWORD, body);
             alert('Check your email');
         } catch (error) {
             alert(`${error}`);
@@ -24,27 +28,28 @@ const ForgotPassword = () => {
         }
     };
     return (
-        <form
+        <StForm
             onSubmit={handleSubmit((values) => {
                 registateUser(values);
             })}>
             <h1>Forgot Password</h1>
-            <hr/>
+            <StHeadLiner/>
             <Controller
                 name="email"
                 control={control}
                 rules={{required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g}}
                 render={({field: {onChange}}) => {
-                    return <Input hintText="Standard email settings" text="Email"
-                        onChange={onChange} error={getError(errors.email?.type, "email")}/>;
+                    return <Input hintText={HINTS.EMAIL_HINT}
+                        text={TEXT_VALUES.EMAIL[0].toUpperCase()+TEXT_VALUES.EMAIL.slice(1)}
+                        onChange={onChange} error={getError(errors.email?.type, TEXT_VALUES.EMAIL)}/>;
                 }}/>
-            <hr/>
-            <input className='submit' type="submit" value="Submit"/>
+            <StHeadLiner/>
+            <StSubmitInput type="submit" value={TEXT_VALUES.SUBMIT_VALUE}/>
             <StyledParagraphSignOut>
                 Want to Log In?
-                <Link to="/">Log In</Link>
+                <Link to={URL.DEFAULT_PAGE}>Log In</Link>
             </StyledParagraphSignOut>
-        </form>
+        </StForm>
     );
 };
 

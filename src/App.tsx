@@ -12,21 +12,21 @@ import ErrorForgotPassword from './components/ErrorForgotPassword/ErrorForgotPas
 import ErrorInvitation from './components/ErrorInvitation/ErrorInvitation';
 import MainLayout from './components/MainLayout/MainLayout';
 import Main from './components/Main/Main';
-
+import {URL} from './constants/url';
 
 function App() {
     return (
         <Routes>
             <Route element={<MainLayout/>}>
-                <Route path="/" element={<SignIn/>}/>
-                <Route path="/signUp" element={<SignUp/>}/>
-                <Route path="/acceptInvitation" element={<AcceptInvitation />} />
-                <Route path="/errorInvitation" element={<ErrorInvitation />} />
-                <Route path="/newPassword" element={<NewPassword/>} />
-                <Route path="/forgotPassword" element={<ForgotPassword/>}/>
-                <Route path="/errorForgotPassword" element={<ErrorForgotPassword />} />
+                <Route path={URL.DEFAULT_PAGE} element={<SignIn/>}/>
+                <Route path={URL.SIGN_UP} element={<SignUp/>}/>
+                <Route path={URL.ACCEPT_INVITATION} element={<AcceptInvitation />} />
+                <Route path={URL.ERROR_INVITATION} element={<ErrorInvitation />} />
+                <Route path={URL.NEW_PASSWORD} element={<NewPassword/>} />
+                <Route path={URL.FORGOT_PASSWORD} element={<ForgotPassword/>}/>
+                <Route path={URL.ERROR_FORGOT_PASSWORD} element={<ErrorForgotPassword />} />
             </Route>
-            <Route path="/main" element={<Main/>}/>
+            <Route path={URL.MAIN_PAGE} element={<Main/>}/>
         </Routes>
         // <MainLayout>
         //     <Routes>

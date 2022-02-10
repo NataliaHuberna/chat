@@ -1,16 +1,17 @@
 import React from 'react';
-import { StyledParagraphSignOut } from '../common/Paragraph/styled';
 import { Link } from 'react-router-dom';
+import { StyledParagraphSignOut } from '../common/Paragraph/styled';
+import { StForm } from '../common/Form/styled';
+import { StyledErrorInv } from '../ErrorInvitation/styled';
+import {URL} from  '../../constants/url';
 
-const ErrorForgotPassword = () => {
-    return (
-        <div>
-            Sry, your invitation is expired!
-            <StyledParagraphSignOut>
-                <Link to="/forgotPassword">Click here!</Link>
-            </StyledParagraphSignOut>
-        </div>
-    );
-};
+const ErrorForgotPassword = () => (
+    <StForm>
+        <StyledErrorInv>Sry, your invitation is expired!</StyledErrorInv>
+        <StyledParagraphSignOut>
+            <Link to={URL.FORGOT_PASSWORD}>Click here!</Link>
+        </StyledParagraphSignOut>
+    </StForm>
+);
 
 export default ErrorForgotPassword;
