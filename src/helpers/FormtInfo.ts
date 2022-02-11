@@ -12,14 +12,13 @@ export const HelperFunc = async (body: any, contextFunc: any, navLink: any, link
 };
 export const HelperTokenBackFunc = async (body: any, contextFunc: any, navLink: any, linkReq:any, linkRedir:any, 
     token: any) => {
-    console.log(linkReq);
     try {
         // @ts-ignore
         const { data: {data} } =await axios.post({
             method: 'post',
             url:linkReq,
             data: body,
-            headers: token,
+            headers: {'token': `${token}`},
         });
         contextFunc({ type: "success", message: `${data}` });
         setTimeout(() =>navLink(linkRedir), 3000);
