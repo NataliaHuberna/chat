@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import Selection from '../common/Select/Select';
@@ -12,7 +12,7 @@ import { TEXT_VALUES,HINTS } from '../../constants/textValues';
 import { BACKEND_URL,URL } from '../../constants/url';
 import { NotificationContext } from '../../context/NotificationContent';
 import Notification from '../common/Notification/Notification';
-import { HelperFunc } from '../../helpers/FormtInfo';
+import { HelperTokenBackFunc } from '../../helpers/FormtInfo';
 
 const USER_OPTIONS = [
     { value: TEXT_VALUES.MALE, label: TEXT_VALUES.MALE },
@@ -30,20 +30,30 @@ const AcceptInvitation = () => {
     const navigate = useNavigate();
     // @ts-ignore
     const {notification, showNotification} = useContext(NotificationContext);
-
+    const [searchParams,]  = useSearchParams();
+    const token = searchParams.get("token");
+    
+    const generateCookie = () => {window.document.cookie = `token=${searchParams.get("token")}`;};
+    generateCookie();
     return (
         <>
             { notification.type && <Notification message={notification.message} type={notification.type} />}
             <StForm
                 onSubmit={handleSubmit((values) => {
                     const res = getFormattedDate(values.date_of_birthday);
-                    HelperFunc({
+                    // HelperFunc({
+                    //     first_name: values.first_name,
+                    //     last_name: values.last_name,
+                    //     date_of_birthday: res,
+                    //     gender: values.gender,
+                    // },
+                    // showNotification, navigate,BACKEND_URL.ACCEPT_INVITATION,URL.MAIN_PAGE);
+                    HelperTokenBackFunc({
                         first_name: values.first_name,
                         last_name: values.last_name,
                         date_of_birthday: res,
                         gender: values.gender,
-                    },
-                    showNotification, navigate,BACKEND_URL.ACCEPT_INVITATION,URL.MAIN_PAGE);
+                    },showNotification, navigate,BACKEND_URL.ACCEPT_INVITATION,URL.MAIN_PAGE,token);
                 })}>
                 <h1>Additional Information</h1>
                 <StHeadLiner/>

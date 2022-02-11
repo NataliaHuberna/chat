@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import { StForm, StHeadLiner } from '../common/Form/styled';
@@ -23,7 +23,6 @@ const SignUp = () => {
     const navigate = useNavigate();
     // @ts-ignore
     const { notification, showNotification } = useContext(NotificationContext);
-
     return (
         <>
             {notification.type && <Notification message={notification.message} type={notification.type}/>}
