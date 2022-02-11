@@ -9,6 +9,7 @@ import { StForm, StHeadLiner } from '../common/Form/styled';
 import { StSubmitInput } from '../common/Input/styled';
 import { BACKEND_URL, URL } from '../../constants/url';
 import { HINTS, TEXT_VALUES } from '../../constants/textValues';
+import {REG_EXP} from '../../constants/regExp';
 
 const ForgotPassword = () => {
     const {
@@ -37,7 +38,7 @@ const ForgotPassword = () => {
             <Controller
                 name="email"
                 control={control}
-                rules={{required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g}}
+                rules={{required: true, pattern: REG_EXP.EMAIL_MAIN_REG_EXP}}
                 render={({field: {onChange}}) => {
                     return <Input hintText={HINTS.EMAIL_HINT}
                         text={TEXT_VALUES.EMAIL[0].toUpperCase()+TEXT_VALUES.EMAIL.slice(1)}

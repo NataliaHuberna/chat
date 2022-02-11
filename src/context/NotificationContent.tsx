@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-const Context = React.createContext(null);
+const Context = React.createContext({});
 
 type TProps = {
     children: React.ReactNode

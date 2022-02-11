@@ -43,6 +43,7 @@ export const StIcon = styled.div`
   display: grid;
   place-items: center;
   padding-left: 10px;
+  cursor: pointer;
   color: ${COLORS.SEMI_PRIMARY_COLOR_SEC};
 `;
 export const StError = styled.p`

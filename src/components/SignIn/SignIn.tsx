@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, {  useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
-import { Link, Navigate } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import { StyledParagraphSignOut } from '../common/Paragraph/styled';
@@ -21,36 +21,33 @@ const SignIn = () => {
     } = useForm({
         mode: 'onChange',
     });
-    const [redirect, setRedirect] = useState(false);
+
+    const navigate = useNavigate();
+    // @ts-ignore
     const {notification, showNotification} = useContext(NotificationContext);
-    const registateUser = async(body: any) => {
+
+    const loginUser = async(body: any) => {
         try {
             await axios.post(BACKEND_URL.SIGN_IN, body);
             showNotification({type: "success", message: `Log in is successful!`});
-            setTimeout(()=>setRedirect(true), 3000);
+            setTimeout(()=>navigate(URL.MAIN_PAGE), 3000);
         } catch (error) {
-            showNotification({type: "fail", message: `${error}`});
-            // alert(`${error}`);
-            return false;
+            // @ts-ignore
+            showNotification({type: "fail", message: `User ${error.response.data.data}`});
         }
     };
-    if (redirect) {
-        return <Navigate to={URL.MAIN_PAGE}/>;
-    }
+
     return (
         <>
             { notification.type && <Notification message={notification.message} type={notification.type} />}
-            {/*<Notification message={notification.message} type={notification.type}/>*/}
             <StForm
-                onSubmit={handleSubmit((values) => {
-                    registateUser(values);
-                })}>
+                onSubmit={handleSubmit((values) => {loginUser(values);})}>
                 <h1>Log In</h1>
                 <StHeadLiner/>
                 <Controller
                     name="email"
                     control={control}
-                    rules={{required: true, pattern: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g}}
+                    rules={{required: true, pattern: REG_EXP.EMAIL_MAIN_REG_EXP}}
                     render={({field: {onChange}}) => {
                         return <Input hintText={HINTS.EMAIL_HINT}
                             text={TEXT_VALUES.EMAIL[0].toUpperCase()+TEXT_VALUES.EMAIL.slice(1)}
