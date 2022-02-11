@@ -1,6 +1,5 @@
 import React, {  useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import axios from 'axios';
 import { Link,useNavigate } from 'react-router-dom';
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
@@ -12,6 +11,7 @@ import { HINTS, TEXT_VALUES } from '../../constants/textValues';
 import { REG_EXP } from '../../constants/regExp';
 import Notification from "../common/Notification/Notification";
 import {NotificationContext} from "../../context/NotificationContent";
+import { HelperFunc } from '../../helpers/FormtInfo';
 
 const SignIn = () => {
     const {
@@ -26,22 +26,12 @@ const SignIn = () => {
     // @ts-ignore
     const {notification, showNotification} = useContext(NotificationContext);
 
-    const loginUser = async(body: any) => {
-        try {
-            await axios.post(BACKEND_URL.SIGN_IN, body);
-            showNotification({type: "success", message: `Log in is successful!`});
-            setTimeout(()=>navigate(URL.MAIN_PAGE), 3000);
-        } catch (error) {
-            // @ts-ignore
-            showNotification({type: "fail", message: `User ${error.response.data.data}`});
-        }
-    };
-
     return (
         <>
             { notification.type && <Notification message={notification.message} type={notification.type} />}
             <StForm
-                onSubmit={handleSubmit((values) => {loginUser(values);})}>
+                onSubmit={handleSubmit((values) => {
+                    HelperFunc(values, showNotification, navigate,BACKEND_URL.SIGN_IN,URL.MAIN_PAGE);})}>
                 <h1>Log In</h1>
                 <StHeadLiner/>
                 <Controller

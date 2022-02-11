@@ -14,7 +14,7 @@ const fadeIn = keyframes`
 
 // eslint-disable-next-line no-undef
 export const StNotification = styled.div<any>`
-  background: ${({isSuccess}) => isSuccess ? `${COLORS.PRIMARY_COLOR}` : `${COLORS.ERROR_COLOR}`};
+  background: ${({isSuccess}) => isSuccess ? `${COLORS.PRIMARY_INPUT_COLOR}` : `${COLORS.ERROR_COLOR}`};
   text-align: center;
   position: absolute;
   top: 35px;

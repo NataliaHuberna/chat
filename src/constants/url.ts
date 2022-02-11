@@ -11,7 +11,7 @@ export const URL = {
 export const BACKEND_URL = {
     ACCEPT_INVITATION: 'http://sluipgenius.pp.ua/api/accept-invitation',
     FORGOT_PASSWORD: 'http://sluipgenius.pp.ua/api/forgot-password',
-    NEW_PASSWORD: 'http://sluipgenius.pp.ua/api/new-password',
+    NEW_PASSWORD: 'http://sluipgenius.pp.ua/api/change-password',
     SIGN_IN: 'http://sluipgenius.pp.ua/api/sign-in',
     SIGN_UP: 'http://sluipgenius.pp.ua/api/sign-up',
 };

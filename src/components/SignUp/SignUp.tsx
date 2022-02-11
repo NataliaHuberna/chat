@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import { StForm, StHeadLiner } from '../common/Form/styled';
 import { StSubmitInput } from '../common/Input/styled';
-import { BACKEND_URL, URL } from '../../constants/url';
 import { REG_EXP } from '../../constants/regExp';
 import { HINTS, TEXT_VALUES } from '../../constants/textValues';
 import { NotificationContext } from '../../context/NotificationContent';
 import Notification from '../common/Notification/Notification';
+import { HelperFunc } from '../../helpers/FormtInfo';
+import { BACKEND_URL, URL } from '../../constants/url';
 
 const SignUp = () => {
     const {
@@ -24,26 +24,15 @@ const SignUp = () => {
     // @ts-ignore
     const { notification, showNotification } = useContext(NotificationContext);
 
-    const registateUser = async (body: any) => {
-        try {
-            await axios.post(BACKEND_URL.SIGN_UP, body);
-            showNotification({ type: "success", message: `You was successfully registered!` });
-            setTimeout(() =>navigate(URL.DEFAULT_PAGE), 3000);
-        } catch (error) {
-            // @ts-ignore
-            showNotification({ type: "fail", message: `${error.response.data.data}` });
-            return false;
-        }
-    };
-
     return (
         <>
             {notification.type && <Notification message={notification.message} type={notification.type}/>}
             <StForm
                 onSubmit={handleSubmit((values) => {
                     values.password === values.RePassword
-                        ? registateUser({email: values.email,password:values.password })
-                        : showNotification({ type: "fail", message: "Password not same"});
+                        ? HelperFunc({ email: values.email, password: values.password },
+                            showNotification, navigate,BACKEND_URL.SIGN_UP,URL.DEFAULT_PAGE)
+                        : showNotification({ type: "fail", message: "Password not same" });
                 })}>
                 <h1>Sign Up</h1>
                 <StHeadLiner/>
