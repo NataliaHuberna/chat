@@ -41,13 +41,6 @@ const AcceptInvitation = () => {
             <StForm
                 onSubmit={handleSubmit((values) => {
                     const res = getFormattedDate(values.date_of_birthday);
-                    // HelperFunc({
-                    //     first_name: values.first_name,
-                    //     last_name: values.last_name,
-                    //     date_of_birthday: res,
-                    //     gender: values.gender,
-                    // },
-                    // showNotification, navigate,BACKEND_URL.ACCEPT_INVITATION,URL.MAIN_PAGE);
                     HelperTokenBackFunc({
                         first_name: values.first_name,
                         last_name: values.last_name,

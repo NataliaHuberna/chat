@@ -13,8 +13,8 @@ export const HelperFunc = async (body: any, contextFunc: any, navLink: any, link
 export const HelperTokenBackFunc = async (body: any, contextFunc: any, navLink: any, linkReq:any, linkRedir:any, 
     token: any) => {
     try {
-        // @ts-ignore
-        const { data: {data} } =await axios.post({
+        console.log(linkReq);
+        const { data: {data} } = await axios({
             method: 'post',
             url:linkReq,
             data: body,
