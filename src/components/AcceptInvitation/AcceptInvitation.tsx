@@ -32,9 +32,7 @@ const AcceptInvitation = () => {
     const {notification, showNotification} = useContext(NotificationContext);
     const [searchParams,]  = useSearchParams();
     const token = searchParams.get("token");
-    
-    const generateCookie = () => {window.document.cookie = `token=${searchParams.get("token")}`;};
-    generateCookie();
+
     return (
         <>
             { notification.type && <Notification message={notification.message} type={notification.type} />}

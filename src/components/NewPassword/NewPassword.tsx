@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import { StForm, StHeadLiner } from '../common/Form/styled';
@@ -10,7 +10,7 @@ import {REG_EXP} from '../../constants/regExp';
 import { HINTS, TEXT_VALUES } from '../../constants/textValues';
 import Notification from '../common/Notification/Notification';
 import { NotificationContext } from '../../context/NotificationContent';
-import { HelperFunc } from '../../helpers/FormtInfo';
+import { HelperTokenBackFunc } from '../../helpers/FormtInfo';
 
 const NewPassword = () => {
     const {
@@ -23,6 +23,8 @@ const NewPassword = () => {
     const navigate = useNavigate();
     // @ts-ignore
     const { notification, showNotification } = useContext(NotificationContext);
+    const [searchParams,]  = useSearchParams();
+    const token = searchParams.get("token");
 
     return (
         <>
@@ -30,8 +32,8 @@ const NewPassword = () => {
             <StForm
                 onSubmit={handleSubmit((values) => {
                     values.password === values.RePassword
-                        ? HelperFunc({password: values.password},
-                            showNotification, navigate,BACKEND_URL.NEW_PASSWORD,URL.DEFAULT_PAGE)
+                        ? HelperTokenBackFunc({password: values.password},
+                            showNotification, navigate,BACKEND_URL.NEW_PASSWORD,URL.DEFAULT_PAGE,token)
                         : showNotification({ type: "fail", message: "Password not same"});
                 })}>
                 <h1>New Password</h1>
