@@ -1,5 +1,4 @@
-// @ts-ignore
-export const getError = ( type, fieldName ) => {
+export const getError = ( type: string, fieldName: string ) => {
     switch (true) {
         case type === "minLength":
             return `Your ${fieldName} too low`;

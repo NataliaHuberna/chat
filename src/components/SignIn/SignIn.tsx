@@ -31,7 +31,7 @@ const SignIn = () => {
             { notification.type && <Notification message={notification.message} type={notification.type} />}
             <StForm
                 onSubmit={handleSubmit((values) => {
-                    HelperFunc(values, showNotification, navigate,BACKEND_URL.SIGN_IN,URL.MAIN_PAGE);})}>
+                    HelperFunc(values, showNotification, navigate, BACKEND_URL.SIGN_IN, URL.MAIN_PAGE);})}>
                 <h1>Log In</h1>
                 <StHeadLiner/>
                 <Controller

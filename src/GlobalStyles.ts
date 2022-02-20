@@ -1,4 +1,5 @@
 import {createGlobalStyle} from 'styled-components';
+import {COLORS} from "./constants/colors";
 
 export const GlobalStyle = createGlobalStyle`
   *{
@@ -7,11 +8,11 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background: rgba(47,100,90,1);
+    background: ${COLORS.PRIMARY_COLOR};
     background: linear-gradient(
             left,
-            rgba(47,100,90,1) 0%,
-            rgba(111,161,123,1) 100%
+            ${COLORS.PRIMARY_COLOR} 0%,
+            ${COLORS.SEMI_PRIMARY_COLOR} 100%
     );
     margin: 0;
     padding: 0;

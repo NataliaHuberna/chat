@@ -41,7 +41,6 @@ const months = [
 
 const DateInput = ({ onChange, value, hintText, text, error }: any) => {
     const handleChange = (date: Date) => onChange(date);
-    // console.log(date);
     return (
         <StDatepickerWrapper error={error}>
             <StyledLabel>{text}</StyledLabel>

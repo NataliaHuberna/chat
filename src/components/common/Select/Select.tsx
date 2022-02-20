@@ -4,8 +4,24 @@ import { ReactComponent as HelpIcon } from '../../../icons/help.svg';
 import { StyledSelectWrapper } from './styled';
 import { StIcon, StyledLabel, StInputItem, StError } from '../Input/styled';
 
-const Selection = ({ onChange, options, hintText,text,error }: any) => {
-    const handleChange = (value: any) => onChange(value.label);
+type TOption = {
+    value: string,
+    label: string
+}
+
+type TProps = {
+    onChange: (value: any) => void,
+    error: string | null,
+    hintText: string,
+    text: string,
+    options: Array<TOption>
+}
+
+const Selection: React.FC<TProps> = ({ onChange, options, hintText, text, error }) => {
+
+    const handleChange = (value: TOption) => onChange(value.label);
+
+    // @ts-ignore
     return (
         <StyledSelectWrapper>
             <StyledLabel>{text}</StyledLabel>
@@ -26,7 +42,7 @@ const Selection = ({ onChange, options, hintText,text,error }: any) => {
                     })}
                 />
                 <StIcon>
-                    <HelpIcon title={hintText || null}/>
+                    <HelpIcon title={hintText}/>
                 </StIcon>
                 {error && <StError>{error}</StError>}
             </StInputItem>

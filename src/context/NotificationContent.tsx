@@ -5,13 +5,18 @@ type TProps = {
     children: React.ReactNode
 };
 
+type TNotification = {
+    type: string,
+    message: string
+}
+
 const NotificationContextProvider:React.FC<TProps> = ({children}) => {
     const [state, setState] = useState ({
         type: '', //"sucess" | "fail"
         message: '',
     });
 
-    const showNotification = ({type, message}:any) => {
+    const showNotification = ({type, message}: TNotification) => {
         setState({type, message});
         setTimeout(clearNotification, 3000);
     };
