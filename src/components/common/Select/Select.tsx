@@ -19,9 +19,8 @@ type TProps = {
 
 const Selection: React.FC<TProps> = ({ onChange, options, hintText, text, error }) => {
 
-    const handleChange = (value: TOption) => onChange(value.label);
+    const handleChange = (value: TOption | null) => onChange(value?.label);
 
-    // @ts-ignore
     return (
         <StyledSelectWrapper>
             <StyledLabel>{text}</StyledLabel>

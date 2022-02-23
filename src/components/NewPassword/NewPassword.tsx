@@ -31,7 +31,6 @@ const NewPassword = () => {
             {notification.type && <Notification message={notification.message} type={notification.type}/>}
             <StForm
                 onSubmit={handleSubmit((values) => {
-                    // @ts-ignore
                     values.password === values.RePassword
                         ? HelperTokenBackFunc({password: values.password},
                             showNotification, navigate, BACKEND_URL.NEW_PASSWORD,URL.DEFAULT_PAGE, token)

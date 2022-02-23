@@ -1,8 +1,12 @@
 import axios from 'axios';
 
 type TBody = {
-    email: string,
-    password: string
+    email?: string,
+    password?: string,
+    first_name?:string,
+    last_name?:string,
+    date_of_birthday?: string,
+    gender?:string
 }
 
 type TContext = {
