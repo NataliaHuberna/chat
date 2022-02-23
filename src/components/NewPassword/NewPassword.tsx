@@ -5,11 +5,12 @@ import Input from '../common/Input/Input';
 import { getError } from '../common/Input/helper';
 import { StForm, StHeadLiner } from '../common/Form/styled';
 import { StSubmitInput } from '../common/Input/styled';
-import { BACKEND_URL, URL } from '../../constants/url';
-import {REG_EXP} from '../../constants/regExp';
-import { HINTS, TEXT_VALUES } from '../../constants/textValues';
-import { HelperTokenBackFunc } from '../../helpers/FormtInfo';
+import { BACKEND_URL, URL } from 'src/constants/url';
+import {REG_EXP} from 'src/constants/regExp';
+import { HelperTokenBackFunc } from 'src/helpers/FormtInfo';
 import { TProps } from '../AcceptInvitation/AcceptInvitation';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { idMessages } from 'src/i18n/types';
 
 const NewPassword = ({showNotification}: TProps) => {
     const {
@@ -19,6 +20,7 @@ const NewPassword = ({showNotification}: TProps) => {
     } = useForm({
         mode: 'onChange',
     });
+    const intl = useIntl();
     const navigate = useNavigate();
     const [searchParams,]  = useSearchParams();
     const token = searchParams.get("token");
@@ -30,9 +32,12 @@ const NewPassword = ({showNotification}: TProps) => {
                     values.password === values.RePassword
                         ? HelperTokenBackFunc({password: values.password},
                             showNotification, navigate, BACKEND_URL.NEW_PASSWORD,URL.DEFAULT_PAGE, token)
-                        : showNotification({ type: "fail", message: "Password not same"});
+                        : showNotification({ type: "fail",
+                            message: `${intl.formatMessage({id: idMessages.messagePasswordNotification})}`});
                 })}>
-                <h1>New Password</h1>
+                <h1>
+                    <FormattedMessage id={idMessages.newPassword}/>
+                </h1>
                 <StHeadLiner/>
                 <Controller
                     name="password"
@@ -42,10 +47,11 @@ const NewPassword = ({showNotification}: TProps) => {
                         minLength: 8, maxLength: 20
                     }}
                     render={({field: {onChange}}) => {
-                        return <Input hintText={HINTS.PASSWORD_HINT}
-                            text={TEXT_VALUES.PASSWORD[0].toUpperCase()+TEXT_VALUES.PASSWORD.slice(1)}
-                            name={TEXT_VALUES.PASSWORD}
-                            onChange={onChange} error={getError(errors.password?.type, TEXT_VALUES.PASSWORD)}/>;
+                        return <Input hintText={intl.formatMessage({id: idMessages.password})}
+                            text={intl.formatMessage({id: idMessages.password})}
+                            name={intl.formatMessage({id: idMessages.password})}
+                            onChange={onChange} error={getError(errors.password?.type,
+                            intl.formatMessage({id: idMessages.password}))}/>;
                     }}/>
                 <Controller
                     name="RePassword"
@@ -55,13 +61,14 @@ const NewPassword = ({showNotification}: TProps) => {
                         minLength: 8, maxLength: 20
                     }}
                     render={({field: {onChange}}) => {
-                        return <Input hintText={HINTS.PASSWORD_HINT}
-                            text={TEXT_VALUES.RE_PASSWORD}
-                            name={TEXT_VALUES.PASSWORD}
-                            onChange={onChange} error={getError(errors.RePassword?.type, TEXT_VALUES.RE_PASSWORD)}/>;
+                        return <Input hintText={intl.formatMessage({id: idMessages.password})}
+                            text={intl.formatMessage({id: idMessages.rePassword})}
+                            name={intl.formatMessage({id: idMessages.password})}
+                            onChange={onChange} error={getError(errors.RePassword?.type,
+                            intl.formatMessage({id: idMessages.rePassword}))}/>;
                     }}/>
                 <StHeadLiner/>
-                <StSubmitInput type="submit" value={TEXT_VALUES.SUBMIT_VALUE}/>
+                <StSubmitInput type="submit" value={intl.formatMessage({ id: idMessages.submit })}/>
             </StForm>
         </>
     );

@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
-import {showNotification} from "../../store/notification/actions";
+import {showNotification} from "src/store/notification/actions";
 import {Dispatch} from "redux";
-import {TNotify} from "../../store/notification/types";
+import {TNotify} from "src/store/notification/types";
 import NewPassword from './NewPassword';
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

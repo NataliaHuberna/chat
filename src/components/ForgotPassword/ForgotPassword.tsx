@@ -6,11 +6,12 @@ import { getError } from '../common/Input/helper';
 import { StyledParagraphSignOut } from '../common/Paragraph/styled';
 import { StForm, StHeadLiner } from '../common/Form/styled';
 import { StSubmitInput } from '../common/Input/styled';
-import { BACKEND_URL, URL } from '../../constants/url';
-import { HINTS, TEXT_VALUES } from '../../constants/textValues';
-import { REG_EXP } from '../../constants/regExp';
-import { HelperFunc } from '../../helpers/FormtInfo';
+import { BACKEND_URL, URL } from 'src/constants/url';
+import { REG_EXP } from 'src/constants/regExp';
+import { HelperFunc } from 'src/helpers/FormtInfo';
 import { TProps } from '../AcceptInvitation/AcceptInvitation';
+import { idMessages } from 'src/i18n/types';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 const ForgotPassword = ({showNotification}:TProps) => {
     const {
@@ -20,7 +21,7 @@ const ForgotPassword = ({showNotification}:TProps) => {
     } = useForm({
         mode: 'onChange',
     });
-
+    const intl = useIntl();
     const navigate = useNavigate();
 
     return (
@@ -28,22 +29,27 @@ const ForgotPassword = ({showNotification}:TProps) => {
             <StForm
                 onSubmit={handleSubmit((values) => {
                     HelperFunc(values, showNotification, navigate,BACKEND_URL.FORGOT_PASSWORD,URL.DEFAULT_PAGE);})}>
-                <h1>Forgot Password</h1>
+                <h1>
+                    <FormattedMessage id={idMessages.passwordForgotString}/>
+                </h1>
                 <StHeadLiner/>
                 <Controller
                     name="email"
                     control={control}
                     rules={{ required: true, pattern: REG_EXP.EMAIL_MAIN_REG_EXP }}
                     render={({ field: { onChange } }) => {
-                        return <Input hintText={HINTS.EMAIL_HINT}
-                            text={TEXT_VALUES.EMAIL[0].toUpperCase() + TEXT_VALUES.EMAIL.slice(1)}
-                            onChange={onChange} error={getError(errors.email?.type, TEXT_VALUES.EMAIL)}/>;
+                        return <Input hintText={intl.formatMessage({ id: idMessages.hintEmail })}
+                            text={intl.formatMessage({ id: idMessages.email })}
+                            onChange={onChange} error={getError(errors.email?.type,
+                            intl.formatMessage({ id: idMessages.email }))}/>;
                     }}/>
                 <StHeadLiner/>
-                <StSubmitInput type="submit" value={TEXT_VALUES.SUBMIT_VALUE}/>
+                <StSubmitInput type="submit" value={intl.formatMessage({ id: idMessages.submit })}/>
                 <StyledParagraphSignOut>
-                    Want to Log In?
-                    <Link to={URL.DEFAULT_PAGE}>Log In</Link>
+                    <FormattedMessage id={idMessages.login}/>
+                    <Link to={URL.DEFAULT_PAGE}>
+                        <FormattedMessage id={idMessages.loginLabel}/>
+                    </Link>
                 </StyledParagraphSignOut>
             </StForm>
         </>

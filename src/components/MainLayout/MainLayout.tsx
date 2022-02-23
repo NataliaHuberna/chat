@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Header from '../common/Header/Header';
-import { getNextRoute } from '../../helpers/routes';
+import { getNextRoute } from 'src/helpers/routes';
 import { StMain } from './styled';
 import Notification from '../common/Notification/index';
 
