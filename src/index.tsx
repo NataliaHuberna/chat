@@ -4,14 +4,15 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyles';
 import reportWebVitals from './reportWebVitals';
-import {NotificationContextProvider} from "./context/NotificationContent";
+import { Provider } from 'react-redux';
+import {store} from './store';
 
 ReactDOM.render(
     <BrowserRouter>
-        <GlobalStyle />
-        <NotificationContextProvider>
-            <App />
-        </NotificationContextProvider>
+        <Provider store={store}>
+            <GlobalStyle/>
+            <App/>
+        </Provider>
     </BrowserRouter>,
     document.getElementById('root')
 );

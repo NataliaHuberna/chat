@@ -1,4 +1,4 @@
-import React, {  useContext } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Link,useNavigate } from 'react-router-dom';
 import Input from '../common/Input/Input';
@@ -9,11 +9,10 @@ import { StSubmitInput } from '../common/Input/styled';
 import { BACKEND_URL,URL } from '../../constants/url';
 import { HINTS, TEXT_VALUES } from '../../constants/textValues';
 import { REG_EXP } from '../../constants/regExp';
-import Notification from "../common/Notification/Notification";
-import {NotificationContext} from "../../context/NotificationContent";
 import { HelperFunc } from '../../helpers/FormtInfo';
+import { TProps } from '../AcceptInvitation/AcceptInvitation';
 
-const SignIn = () => {
+const SignIn = ({showNotification}:TProps) => {
     const {
         handleSubmit,
         formState: {errors},
@@ -23,12 +22,9 @@ const SignIn = () => {
     });
 
     const navigate = useNavigate();
-    // @ts-ignore
-    const {notification, showNotification} = useContext(NotificationContext);
 
     return (
         <>
-            { notification.type && <Notification message={notification.message} type={notification.type} />}
             <StForm
                 onSubmit={handleSubmit((values) => {
                     HelperFunc(values, showNotification, navigate, BACKEND_URL.SIGN_IN, URL.MAIN_PAGE);})}>

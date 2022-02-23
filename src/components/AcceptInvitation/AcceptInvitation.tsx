@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Input from '../common/Input/Input';
@@ -10,16 +10,19 @@ import { StSubmitInput } from '../common/Input/styled';
 import { getFormattedDate } from '../../helpers/generatorDate';
 import { TEXT_VALUES,HINTS } from '../../constants/textValues';
 import { BACKEND_URL,URL } from '../../constants/url';
-import { NotificationContext } from '../../context/NotificationContent';
-import Notification from '../common/Notification/Notification';
 import { HelperTokenBackFunc } from '../../helpers/FormtInfo';
+import { TNotify } from '../../store/notification/types';
+
+export type TProps = {
+    showNotification: (payload:TNotify)=>void,
+}
 
 const USER_OPTIONS = [
     { value: TEXT_VALUES.MALE, label: TEXT_VALUES.MALE },
     { value: TEXT_VALUES.FEMALE, label: TEXT_VALUES.FEMALE },
 ];
 
-const AcceptInvitation = () => {
+const AcceptInvitation = ({showNotification}:TProps) => {
     const {
         handleSubmit,
         formState: { errors },
@@ -28,14 +31,11 @@ const AcceptInvitation = () => {
         mode: 'onChange',
     });
     const navigate = useNavigate();
-    // @ts-ignore
-    const {notification, showNotification} = useContext(NotificationContext);
     const [searchParams,]  = useSearchParams();
     const token = searchParams.get("token");
 
     return (
         <>
-            { notification.type && <Notification message={notification.message} type={notification.type} />}
             <StForm
                 onSubmit={handleSubmit((values) => {
                     const res = getFormattedDate(values.date_of_birthday);
@@ -53,9 +53,9 @@ const AcceptInvitation = () => {
                     control={control}
                     rules={{ required: true, minLength: 2 }}
                     render={({ field: { onChange } }) => {
-                        return <Input hintText={HINTS.ADDITIONAL_INFO_NAMES} 
+                        return <Input hintText={HINTS.ADDITIONAL_INFO_NAMES}
                             text={TEXT_VALUES.HEADER_FIRST_NAME[0].toUpperCase()+TEXT_VALUES.HEADER_FIRST_NAME.slice(1)}
-                            onChange={onChange} 
+                            onChange={onChange}
                             error={getError(errors.first_name?.type, TEXT_VALUES.HEADER_FIRST_NAME)}/>;
                     }}/>
                 <Controller
@@ -63,9 +63,9 @@ const AcceptInvitation = () => {
                     control={control}
                     rules={{ required: true, minLength: 2 }}
                     render={({ field: { onChange } }) => {
-                        return <Input hintText={HINTS.ADDITIONAL_INFO_NAMES} 
+                        return <Input hintText={HINTS.ADDITIONAL_INFO_NAMES}
                             text={TEXT_VALUES.HEADER_LAST_NAME[0].toUpperCase()+TEXT_VALUES.HEADER_LAST_NAME.slice(1)}
-                            onChange={onChange} 
+                            onChange={onChange}
                             error={getError(errors.last_name?.type, TEXT_VALUES.HEADER_LAST_NAME)}/>;
                     }}/>
                 <Controller
@@ -73,7 +73,7 @@ const AcceptInvitation = () => {
                     control={control}
                     rules={{ required: true }}
                     render={({ field: { onChange, value } }) => {
-                        return <DateInput hintText={HINTS.BIRTHDAY_HINT} 
+                        return <DateInput hintText={HINTS.BIRTHDAY_HINT}
                             text={TEXT_VALUES.HEADER_DATE[0].toUpperCase()+TEXT_VALUES.HEADER_DATE.slice(1)}
                             onChange={onChange} value={value}
                             error={getError(errors.date_of_birthday?.type, TEXT_VALUES.HEADER_DATE)}/>;
@@ -83,7 +83,7 @@ const AcceptInvitation = () => {
                     control={control}
                     rules={{ required: true }}
                     render={({ field: { onChange } }) => {
-                        return <Selection hintText={HINTS.GENDER_HINT} 
+                        return <Selection hintText={HINTS.GENDER_HINT}
                             text={TEXT_VALUES.HEADER_GENDER[0].toUpperCase()+TEXT_VALUES.HEADER_GENDER.slice(1)}
                             onChange={onChange}
                             options={USER_OPTIONS}

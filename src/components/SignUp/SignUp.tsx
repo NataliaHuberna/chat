@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useNavigate} from "react-router-dom";
 import Input from '../common/Input/Input';
@@ -7,12 +7,11 @@ import { StForm, StHeadLiner } from '../common/Form/styled';
 import { StSubmitInput } from '../common/Input/styled';
 import { REG_EXP } from '../../constants/regExp';
 import { HINTS, TEXT_VALUES } from '../../constants/textValues';
-import { NotificationContext } from '../../context/NotificationContent';
-import Notification from '../common/Notification/Notification';
 import { HelperFunc } from '../../helpers/FormtInfo';
 import { BACKEND_URL, URL } from '../../constants/url';
+import { TProps } from '../AcceptInvitation/AcceptInvitation';
 
-const SignUp = () => {
+const SignUp = ({showNotification}:TProps) => {
     const {
         handleSubmit,
         formState: { errors, isDirty },
@@ -21,11 +20,9 @@ const SignUp = () => {
         mode: 'onChange',
     });
     const navigate = useNavigate();
-    // @ts-ignore
-    const { notification, showNotification } = useContext(NotificationContext);
+
     return (
         <>
-            {notification.type && <Notification message={notification.message} type={notification.type}/>}
             <StForm
                 onSubmit={handleSubmit((values) => {
                     values.password === values.RePassword
